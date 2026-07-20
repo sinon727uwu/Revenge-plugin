@@ -1,0 +1,7 @@
+{
+  "name": "CommandExecutor",
+  "description": "Modulares Plugin zum Ausführen von Slash Commands",
+  "author": "sinon727uwu",
+  "version": "1.0.0",
+  "main": "dist/index.js"
+}
