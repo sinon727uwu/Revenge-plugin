@@ -1,0 +1,42 @@
+import { commands } from "@revenge-mod/api";
+import { executeSlashCommand } from "./commandExecutor";
+
+let unregisters: (() => void)[] = [];
+
+export function registerCustomCommands() {
+  const triggerCmd = commands.registerCommand({
+    name: "run-bot-cmd",
+    description: "Führt einen Bot Slash Command aus.",
+    options: [
+      {
+        name: "command",
+        description: "Name des Commands",
+        type: 3,
+        required: true,
+      },
+    ],
+    async execute(args, ctx) {
+      const targetCommand = args.find((a: any) => a.name === "command")?.value;
+      if (!targetCommand) return { content: "❌ Kein Command angegeben." };
+
+      const success = await executeSlashCommand({
+        channelId: ctx.channel.id,
+        commandName: targetCommand,
+      });
+
+      return {
+        content: success
+          ? `✅ \`/${targetCommand}\` gesendet.`
+          : `❌ Fehler beim Senden von \`/${targetCommand}\`.`,
+      };
+    },
+  });
+
+  unregisters.push(triggerCmd);
+}
+
+export function unregisterCustomCommands() {
+  unregisters.forEach((unregister) => unregister());
+  unregisters = [];
+  }
+
