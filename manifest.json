@@ -1,0 +1,11 @@
+{
+  "name": "CommandExecutor",
+  "description": "Modulares Plugin zum Ausfuehren von Slash Commands",
+  "authors": [
+    {
+      "name": "sinon727uwu",
+      "id": "123456789012345678"
+    }
+  ],
+  "main": "src/index.ts"
+}
